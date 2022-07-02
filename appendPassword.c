@@ -8,7 +8,17 @@ char *getString(char *question);
 
 int main(void)
 {
-  FILE *f = fopen("/home/debian/passwords.csv", "a");
+  char *homePath = getenv("HOME");
+  char *fileName = "/.passwords.csv";
+  int pathSize = strlen(homePath) + strlen(fileName) + 1;
+  char filePath[pathSize];
+
+  memset(filePath, '\0', pathSize);
+
+  strcpy(filePath, homePath);
+  strcat(filePath, fileName);
+
+  FILE *f = fopen(filePath, "a");
 
   if (f == NULL)
   {
